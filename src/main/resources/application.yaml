@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://alessio:watchDateALive@cluster0.jhrupbs.mongodb.net/?retryWrites=true&w=majority
+      database: Views
