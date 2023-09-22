@@ -4,7 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "Viewers")
 @Data
@@ -14,12 +14,13 @@ public class Viewer {
     @Id
     private long id; // the position in which the viewer has entered its IP address
     private String ip;
-    private LocalDate date;
+    private LocalDateTime date;
     private int viewCount;
+    private int totalViewCount;
 
     public Viewer(String ip) {
         this.ip = ip;
-        this.date = LocalDate.now();
-        this.viewCount = 0;
+        this.date = LocalDateTime.now();
+        this.viewCount = 1;
     }
 }

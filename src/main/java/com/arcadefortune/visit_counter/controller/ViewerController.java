@@ -10,22 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/visit")
+@RequestMapping("/")
 public class ViewerController {
     @Autowired
     private ViewerService service;
 
-    // addIp
+    // hello world (not important)
     @GetMapping
+    public String hello() {
+        return "Hello World.";
+    }
+
+    // addIp
+    @GetMapping("/visit")
     public Viewer addView(HttpServletRequest httpServletRequest) {
         String ip = httpServletRequest.getRemoteAddr();
+
+        // add to total views
+        service.incrementTotalViewCount();
+
         if (service.doesViewerExistWithIp(ip)) {
             // get existing viewer
             Viewer viewer = service.getViewerByIp(ip);
             // edit existing viewer
             return service.incrementViewCount(viewer);
         } else {
-            // create new viewer
+            // register new viewer
             return service.addViewerWithIp(ip);
         }
     }
