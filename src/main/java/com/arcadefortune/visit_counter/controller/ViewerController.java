@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.image.BufferedImage;
 
-
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -30,7 +28,7 @@ public class ViewerController {
     // hello world (not important)
     @GetMapping
     public String hello() {
-        return "Hello World.";
+        return "Hello World. | Current Version: 1.2.2 | made by ArcadeFortune / Alessio Lama | watch Date A Live";
     }
 
     // addIp
@@ -55,9 +53,8 @@ public class ViewerController {
     @GetMapping(value = "/totalviewcount", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getTotalViewCount(HttpServletRequest httpServletRequest) throws IOException {
         int totalViewCount = setViewer(httpServletRequest).getTotalViewCount();
-        System.out.println(service.getTotalViews().getTotalViews());
 
-        BufferedImage generatedImage = imageService.generateImage(totalViewCount);
+        BufferedImage generatedImage = imageService.generateImage("A total of " + totalViewCount + " people have visited me!");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(generatedImage, "png", baos);
@@ -68,9 +65,8 @@ public class ViewerController {
     @GetMapping(value = "/viewcount", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getViewCount(HttpServletRequest httpServletRequest) throws IOException {
         int viewCount = setViewer(httpServletRequest).getViewCount();
-        System.out.println(service.getTotalViews().getTotalViews());
 
-        BufferedImage generatedImage = imageService.generateImage(viewCount);
+        BufferedImage generatedImage = imageService.generateImage("You visited me " + viewCount + " times!");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(generatedImage, "png", baos);
